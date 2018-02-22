@@ -18,7 +18,6 @@ RUN { \
         echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
     } > /usr/local/bin/docker-java-home \
     && chmod +x /usr/local/bin/docker-java-home \
-    && set -x \
     && apk add --no-cache openjdk8="$JAVA_ALPINE_VERSION" \
     && [ "$JAVA_HOME" = "$(docker-java-home)" ] \
     && ln -snf /usr/share/zoneinfo/$TIME_ZONE /etc/localtime \ 
@@ -30,4 +29,7 @@ EXPOSE 8080
 
 ONBUILD COPY app.jar /app/app.jar
 
-CMD ["java $JAVA_OPTS -jar /app/app.jar --spring.profiles.active=$SPRING_PROFILES_ACTIVE > $LOG_NAME"]
+CMD java $JAVA_OPTS \ 
+         -jar /app/app.jar \
+         --spring.profiles.active=$SPRING_PROFILES_ACTIVE \
+         > $LOG_NAME
