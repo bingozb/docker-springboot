@@ -9,7 +9,6 @@ ENV PATH                        $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr
 ENV JAVA_OPTS                   ""
 ENV TIME_ZONE                   Asia/Shanghai
 ENV SPRING_PROFILES_ACTIVE      dev
-ENV LOG_NAME                    app.log
 
 RUN { \
         echo '#!/bin/sh'; \
@@ -31,5 +30,4 @@ ONBUILD COPY app.jar /app/app.jar
 
 CMD java $JAVA_OPTS \ 
          -jar /app/app.jar \
-         --spring.profiles.active=$SPRING_PROFILES_ACTIVE \
-         > $LOG_NAME
+         --spring.profiles.active=$SPRING_PROFILES_ACTIVE
