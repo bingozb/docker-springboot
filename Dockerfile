@@ -26,8 +26,6 @@ WORKDIR /app
 
 EXPOSE 8080
 
-ONBUILD COPY app.jar /app/app.jar
-
 CMD java $JAVA_OPTS \ 
          -jar /app/app.jar \
          --spring.profiles.active=$SPRING_PROFILES_ACTIVE
